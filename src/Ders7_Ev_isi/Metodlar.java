@@ -1,44 +1,28 @@
 package Ders7_Ev_isi;
 
 public class Metodlar {
-int m1(int begin,int end) {
-	int ededi_orta=0;
-	int ededsayi=0;
-	int ededcemi=0;
-	if(begin>end){
-		
-		
-		
-		while(end!=begin) {
+
+	static double DaireninSahesiHesablayici(double radius) {
+		double pi=3.14;
+		double sahe=2*pi*radius;
+		return sahe;
+	}
 	
-
-
-	while(end!=0) {
-		
-		ededsayi++;
-		int qaliq=end%10;
-		
-		 ededcemi+=qaliq;
-		end/=10;
-	}
-	 ededi_orta=ededcemi/ededsayi;
-	System.out.println(ededi_orta);
-	end++;
-	}
-}else if(end>begin) {
-	while(end!=begin) {
-		while(end!=0) {
-			
-			ededsayi++;
-			int qaliq=end%10;
-			
-			 ededcemi+=qaliq;
-			end/=10;
+	String HefteninGunu(int number) {
+		if(number==1) {
+			System.out.println("Bazar ertesi");
+		}else if(number==2) {
+			System.out.println("Cersenbe axsami");
+		}else if(number==3) {
+			System.out.println("Cersenbe");
+		}else if(number==4) {
+			System.out.println("Cume axsami");
+		}else if(number==5) {
+			System.out.println("Cume");
+		}else if(number==6) {
+			System.out.println("Senbe");
+		}else if(number==7) {
+			System.out.println("Bazar");
 		}
-		 ededi_orta=ededcemi/ededsayi;
-		System.out.println(ededi_orta);
-		end++;
 	}
-}
-}
 }
