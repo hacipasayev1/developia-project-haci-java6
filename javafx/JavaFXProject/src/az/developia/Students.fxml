@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="az.developia.StudentController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="700.0" spacing="4.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Ad">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameTF">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="15.0" layoutY="15.0" text="Soyad">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="surnameTF" layoutX="59.0" layoutY="15.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Tevellud">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="birthdayDP" />
+                  <Label layoutX="15.0" layoutY="15.0" text="Sektor">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="sectorCB" prefWidth="150.0" promptText="Sektoru sec" />
+               </children>
+               <padding>
+                  <Insets left="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="58.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Cins">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="maleRB" mnemonicParsing="false" text="Kisi">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                     </toggleGroup>
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="femaleRB" layoutX="77.0" layoutY="15.0" mnemonicParsing="false" text="Qadin" toggleGroup="$gender">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets left="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="106.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#saveButtonAction" style="-fx-background-color: green;" text="Yadda saxla">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteButtonAction" style="-fx-background-color: red;" text="Sil">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="134.0" layoutY="15.0" mnemonicParsing="false" onAction="#editButtonAction" style="-fx-background-color: blue;" text="Redakte" textFill="#f8efef">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView fx:id="studentsTable" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="Kod" />
+                <TableColumn fx:id="nameColumn" prefWidth="154.0" text="Ad" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="169.0" text="Soyad" />
+                  <TableColumn fx:id="birthdayColumn" prefWidth="97.0" text="Tevellud" />
+                  <TableColumn fx:id="sectotColumn" prefWidth="81.0" text="Sektor" />
+                  <TableColumn fx:id="genderColumn" prefWidth="112.0" text="Cins" />
+              </columns>
+            </TableView>
+            <HBox layoutX="14.0" layoutY="166.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="rowCountLabel" text="Setir sayi">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
