@@ -33,6 +33,9 @@ public Student(Integer id, String name, String surname, LocalDate birthday, Stri
 	this.sector = sector;
 	this.gender = gender;
 }
+public Student() {
+	// TODO Auto-generated constructor stub
+}
 @Override
 public String toString() {
 	return "Student [id=" + id + ", name=" + name + ", surname=" + surname + ", birthday=" + birthday + ", sector="

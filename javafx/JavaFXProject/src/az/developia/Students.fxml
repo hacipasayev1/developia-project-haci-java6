@@ -65,7 +65,7 @@
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="maleRB" mnemonicParsing="false" text="Kisi">
+                  <RadioButton fx:id="maleRB" mnemonicParsing="false" selected="true" text="Kisi">
                      <toggleGroup>
                         <ToggleGroup fx:id="gender" />
                      </toggleGroup>
