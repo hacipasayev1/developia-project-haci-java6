@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="kitab.BookController">
+   <children>
+      <VBox prefHeight="800.0" prefWidth="800.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Kitab adi">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameTF" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Muellif">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="authorTF" layoutX="116.0" layoutY="10.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Qiymeti">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceTF" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Tarix">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dateTF" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <children>
+                  <Label text="Kitab novu">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="novCB" prefWidth="150.0" promptText="novu sec" />
+               </children>
+            </HBox>
+            <TableView fx:id="booktable" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="codecolumn" prefWidth="91.0" text="Kod" />
+                <TableColumn fx:id="namecolumn" prefWidth="236.0" text="Ad" />
+                  <TableColumn fx:id="authorcolumn" prefWidth="194.0" text="Muellif" />
+                  <TableColumn fx:id="datecolumn" prefWidth="139.0" text="Tarix" />
+                  <TableColumn fx:id="pricecolumn" prefWidth="129.0" text="Qiymet" />
+              </columns>
+            </TableView>
+            <HBox layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" style="-fx-background-color: green;" text="Yadda saxla">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#delete" style="-fx-background-color: red;" text="Sil">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="120.0" layoutY="15.0" mnemonicParsing="false" onAction="#edit" style="-fx-background-color: red;" text="Redakte">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="336.0" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="rowCountLabel" text="Setir sayi">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
