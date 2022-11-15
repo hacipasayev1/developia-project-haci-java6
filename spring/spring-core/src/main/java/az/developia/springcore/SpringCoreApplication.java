@@ -15,6 +15,8 @@ public class SpringCoreApplication {
 //	System.out.println(s.getLaptop());
 	MyConfig c=context.getBean(MyConfig.class);
 	System.out.println(c.getCompanyName());
+	Employee e2=context.getBean("myEmployee",Employee.class);
+	System.out.println(e2);
 	
 	
 	
