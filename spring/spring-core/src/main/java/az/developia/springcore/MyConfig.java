@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import az.developia.springcore.beans.Computer;
+
 @Configuration
 public class MyConfig {
 	
@@ -40,4 +42,13 @@ public Laptop myLaptop() {
 	return l;
 }
 
+	@Bean
+	public Computer myComputer() {
+		Computer l=new Computer();
+		l.setBrand("hp");
+		l.setPrice(1234);
+		l.setColor("red");
+		l.setId(432);
+		return l;
+	}
 }
