@@ -10,6 +10,8 @@ public class SpringBeanScopesApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringBeanScopesApplication.class, args);
 		Computer c=context.getBean(Computer.class);
+		Home h=context.getBean(Home.class);
+		Home h1=context.getBean(Home.class);
 		
 	}
 
