@@ -1,28 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Telebelerin siyahisi</title>
 <style type="text/css">
-table{
-width: 100%;
-border: 1px solid black;
-border-collapse: collapse;
+table {
+	width: 100%;
+	border: 1px solid black;
+	border-collapse: collapse;
 }
-th,td{
-border: 1px solid black;
+
+th, td {
+	border: 1px solid black;
 }
 </style>
 </head>
 <body>
-<table>
-<thead>
-<tr><th>ID</th><th>Ad</th><th>Soyad</th><th>Email</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>Adil</td><td>Eliyev</td><td>adil@mail.com</td></tr>
-<tr><td>2</td><td>Ayxan</td><td>Veliyev</td><td>ayxan@mail.com</td></tr>
-</tbody>
-</table>
+<a th:href="@{/}">Ana sehife</a>|
+<hr>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Ad</th>
+				<th>Soyad</th>
+				<th>Email</th>
+			</tr>
+			
+		</thead>
+		<tbody>
+		<tr th:each="student:${telebeler}">
+		<td th:text="${student.id}"></td>
+	<td th:text="${student.name}"></td>
+	<td th:text="${student.surname}"></td>
+	<td th:text="${student.email}"></td>
+		</tr>
+		</tbody>
+	</table>
 </body>
 </html>
