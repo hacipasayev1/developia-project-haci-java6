@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Yeni kitab formu</title>
+</head>
+<body>
+<h1>Yeni kitab qeydiyyati</h1>
+<form th:object="${book}" th:action="@{/books/save}" method="POST">
+<input th:field="*{id}" type="hidden">
+<label for="book-name">Ad</label><br>
+<input type="text" id="book-name" th:field="*{name}"><br>
+<label for="book-price">Qiymet</label><br>
+<input type="text" id="book-price" th:field="*{price}"><br>
+<label for="book-printdate">Captarixi</label><br>
+<input type="date" id="book-printdate" th:field="*{printdate}"><br>
+<label for="book-author">Muellif</label><br>
+<select  id="book-author" th:field="*{author}">
+<option th:text="'Nizami Gencevi'" th:value="'Nizami'"></option>
+<option th:text="'Bextiyar Vahabzade'" th:value="'Bextiyar'"></option>
+</select>
+<input type="submit" value="Yadda saxla">
+</form>
+</body>
+</html>
