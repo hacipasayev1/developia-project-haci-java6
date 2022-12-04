@@ -1,21 +1,23 @@
 <!DOCTYPE html>
+<html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Telebelerin siyahisi</title>
 <style type="text/css">
-table {
-	width: 100%;
-	border:1px solid red;
-	border-collapse: collapse;
+table{
+width: 100%;
+border: 1px solid black;
+border-collapse: collapse;
 }
 th,td{
-border:1px solid green;
+border: 1px solid black;
 }
 </style>
 </head>
 <body>
-<a th:href="@{/}">Ana sehife</a>
+<a th:href="@{/}">Ana sehife</a>|
+<a th:href="@{/students/open-save-html}">Yeni telebe</a>|
 <hr>
 	<table>
 		<thead>
@@ -25,15 +27,15 @@ border:1px solid green;
 				<th>Soyad</th>
 				<th>Email</th>
 			</tr>
+			
 		</thead>
 		<tbody>
-			<tr th:each="student:${telebeler}">
-				<td th:text="${student.id}"></td>
-				<td th:text="${student.name}"></td>
-				<td th:text="${student.surname}"></td>
-				<td th:text="${student.email}"></td>
-			</tr>
-			
+		<tr th:each="student:${telebeler}">
+		<td th:text="${student.id}"></td>
+	<td th:text="${student.name}"></td>
+	<td th:text="${student.surname}"></td>
+	<td th:text="${student.email}"></td>
+		</tr>
 		</tbody>
 	</table>
 </body>
