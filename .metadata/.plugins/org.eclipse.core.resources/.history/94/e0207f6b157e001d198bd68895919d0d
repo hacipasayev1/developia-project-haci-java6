@@ -1,0 +1,15 @@
+package az.developia.computer.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@enti
+public class Computer {
+private Integer id;
+private String name;
+private Double price;
+}

@@ -1,0 +1,5 @@
+package az.developia.computer.model;
+
+public class Computer {
+
+}
