@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,27 +25,34 @@ import az.developia.springrest.service.StudentService;
 public class StudentRestController {
 	
 	private List<Student> list;
-	@PostConstruct
-	private void loadAll() {
-		list=service.findAll();
-	}
+
 @Autowired
 private StudentService service;
-
+boolean loadStudents=false;
 
 @GetMapping
+@PreAuthorize(value = "hasAuthority('student:find:all')")
 public List<Student> findAll(){
-	
+	if(loadStudents) {
+		
+	}else {
+		list=service.findAll();
+		loadStudents=true;
+	}
 	return list;
 }
 
 @GetMapping(path="/{id}")
+@PreAuthorize(value = "hasAuthority('student:find:one')")
+
 public Student findById(@PathVariable Integer id) {
 	Student student=service.findById(id);
 	return student;
 }
 
 @DeleteMapping(path="/{id}")
+@PreAuthorize(value = "hasAuthority('student:delete')")
+
 public void deleteById(@PathVariable Integer id) {
 service.deleteById(id);
 }
