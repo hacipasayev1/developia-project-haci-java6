@@ -23,3 +23,17 @@ values
 ('u2','student:find:one'),
 ('u3','student'),
 ('u4','manager');
+
+insert into customers
+(name,phone)
+values
+('Perviz','088'),
+('Eli','089'),
+('Haci','435');
+
+insert into orders
+(price,address,customer_id)
+values
+('566','Baku',1),
+('456','Seki',2),
+('345','Gence',1);
