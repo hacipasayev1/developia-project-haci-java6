@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import az.developia.springrest.model.DataWrapper;
 import az.developia.springrest.model.Student;
+import az.developia.springrest.repository.StudentRepository;
 import az.developia.springrest.service.StudentService;
 
 @RestController
@@ -19,9 +21,13 @@ import az.developia.springrest.service.StudentService;
 public class StudentRestController {
 	@Autowired
 	private StudentService service;
+	@Autowired
+	private StudentRepository repository;
 	@GetMapping
-	public List<Student> findAll(){
-		return service.findAll();
+	public DataWrapper findAll(){
+		DataWrapper dw=new DataWrapper();
+		dw.setStudents( service.findAll());
+		return dw;//dw aop olmadan nece deyer qaytarir front-a
 	}
 	
 	@GetMapping(path="/{id}")
@@ -36,7 +42,7 @@ public class StudentRestController {
 	}
 	@PostMapping
 	public Student save(@RequestBody Student student) {
-	
+	student.setId(null);
 		service.save(student);
 	
 		return student;
