@@ -25,7 +25,7 @@ public class MyAspect {
 
 
 
-@Around(value = "execution(  * findAll*(..))")
+@Around(value = "execution(  * az.developia.springrest.service.*.findAll*(..))")
 public Object doIt6(ProceedingJoinPoint pjp) {
 
 	Object proceed=null;
@@ -39,8 +39,12 @@ public Object doIt6(ProceedingJoinPoint pjp) {
 
 
 
-	System.out.println("::::"+dw);
-	return null;
+	System.out.println("::::"+dw.getAge());
+	System.out.println("::::"+dw.getStudents());
+for (Student s : dw.getStudents()) {
+	s.setName("Adil12");
+}
+	return dw;
 }
 
 

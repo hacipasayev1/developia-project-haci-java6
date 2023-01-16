@@ -25,9 +25,7 @@ public class StudentRestController {
 	private StudentRepository repository;
 	@GetMapping
 	public DataWrapper findAll(){
-		DataWrapper dw=new DataWrapper();
-		dw.setStudents( service.findAll());
-		return dw;//dw aop olmadan nece deyer qaytarir front-a
+		return service.findAll();
 	}
 	
 	@GetMapping(path="/{id}")

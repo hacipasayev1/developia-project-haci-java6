@@ -7,4 +7,5 @@ import lombok.Data;
 @Data
 public class DataWrapper {
 private List<Student> students;
+private Integer age;
 }

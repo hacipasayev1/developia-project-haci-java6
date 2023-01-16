@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import az.developia.springrest.model.DataWrapper;
 import az.developia.springrest.model.Student;
 import az.developia.springrest.repository.StudentRepository;
 
@@ -13,8 +14,11 @@ import az.developia.springrest.repository.StudentRepository;
 public class StudentService {
 	@Autowired
 	private StudentRepository repository;
-	public List<Student> findAll(){
-		return repository.findAll();
+	public DataWrapper findAll(){
+		DataWrapper dw=new DataWrapper();
+		dw.setStudents( repository.findAll());
+		dw.setAge(12);
+		return dw;
 	}
 	public void save(Student s) {
 		repository.save(s);
