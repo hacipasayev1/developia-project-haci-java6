@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Student {
@@ -12,7 +13,13 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Integer id;
 	@NotEmpty(message = "Boş qoymaq olmaz!")
+	@Size(min=2,message = "Minimum 2 simvol yazılmalıdır!")
+	@Size(max=30,message = "Maksimum 30 simvol yazılmalıdır!")
+
 private String name;
+	@NotEmpty(message = "Boş qoymaq olmaz!")
+	@Size(min=2,message = "Minimum 2 simvol yazılmalıdır!")
+	@Size(max=30,message = "Maksimum 30 simvol yazılmalıdır!")
 private String surname;
 public Integer getId() {
 	return id;

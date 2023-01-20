@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import az.developia.studentcrud.exception.MyRuntimeException;
 import az.developia.studentcrud.model.Student;
 import az.developia.studentcrud.repository.StudentRepository;
 
@@ -30,7 +31,7 @@ private StudentRepository studentRepository;
 	@PostMapping
 	public Student save(@Valid @RequestBody Student student,BindingResult result) {
 		if(result.hasErrors()) {
-		throw new RuntimeException("Məlumatlar tam deyil!");
+		throw new MyRuntimeException(result);
 		}
 		return studentRepository.save(student);
 		
@@ -50,10 +51,5 @@ private StudentRepository studentRepository;
 	public Student findById(@PathVariable Integer id) {
 		return studentRepository.findById(id).get();
 	}
-	@ExceptionHandler
-	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
-	public String handleRuntimeException(RuntimeException exception) {
-		return exception.getMessage();
-		
-	}
+	
 }
