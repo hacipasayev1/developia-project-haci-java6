@@ -16,12 +16,17 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
+import az.developia.springxml.loggers.MyLogger;
+
 @RestController
 @RequestMapping(path = "/students")
 public class StudentRestController {
 	private ArrayList<Student> students = new ArrayList<>();
 	@Autowired
 	private ModelMapper mapper;
+	
+	@Autowired
+	private MyLogger logger;
 
 	@PostConstruct
 	private void init() {
@@ -37,6 +42,7 @@ public class StudentRestController {
 			mapper.map(s, dto);
 			dtos.add(dto);
 		}
+		logger.log("salam");
 		return filter(dtos, "s", "id", "surname");
 	}
 
