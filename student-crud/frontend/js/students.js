@@ -6,6 +6,8 @@ var studentsTbodyElement = document.getElementById('students-tbody');
 var headerTextElement= document.getElementById('header-text');
 var nameErrorElement=document.getElementById('name-error');
 var surnameErrorElement=document.getElementById('surname-error');
+var studentNoteInput=document.getElementById('student-note');
+
 function onSaveStudent(event) {
     event.preventDefault();
     var studentName = studentNameInput.value;
@@ -67,7 +69,10 @@ function fillStudentsTable(students) {
         studentsTbodyHtml += "<td>" + student.surname + "</td>";
 
         studentsTbodyHtml += "<td><button class='btn btn-danger' onclick='onDeleteStudent(" + student.id + ")'>Sil</button> ";
-        studentsTbodyHtml += "<button class='btn btn-primary' onclick='onEditStudent(" + student.id + ")'>Redakte</button></td></tr>";
+        studentsTbodyHtml += "<button class='btn btn-primary' onclick='onEditStudent(" + student.id + ")'>Redakte</button> ";
+        studentsTbodyHtml += "<button class='btn btn-secondary' onclick='onNoteStudent(" + student.id + ")' type='button'  data-toggle='modal' data-target='#noteModal' "+
+        ">Qeyd yaz</button></td></tr>";
+
     }
     studentsTbodyElement.innerHTML = studentsTbodyHtml;
 }
@@ -102,4 +107,31 @@ setHeaderText('Yeni tələbə qeydiyyatı');
 function clearErrorMessages(){
     nameErrorElement.innerHTML="";
     surnameErrorElement.innerHTML="";
+}
+function onNoteStudent(studentId){
+    selectedStudentId=studentId;
+    
+}
+
+function onSaveStudentNote(event) {
+    event.preventDefault();
+    var studentNote = studentNoteInput.value;
+
+    var studentNoteObject = {};
+    studentNoteObject.note = studentNote;
+    studentNoteObject.studentId=selectedStudentId;
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+        if(this.status==400){
+            alert('Qeyd əlavə edilə bilmədi!');
+
+        }else{
+          
+           alert('Qeyd əlavə edildi');
+        }
+        
+    }
+    http.open("POST",API_URL+ "/student-notes", true);
+    http.setRequestHeader("Content-type", "application/json");
+    http.send(JSON.stringify(studentNoteObject));
 }
