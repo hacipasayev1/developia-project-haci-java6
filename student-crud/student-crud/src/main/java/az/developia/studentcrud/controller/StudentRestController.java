@@ -20,36 +20,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.studentcrud.exception.MyRuntimeException;
 import az.developia.studentcrud.model.Student;
+import az.developia.studentcrud.model.StudentNote;
+import az.developia.studentcrud.repository.StudentNoteRepository;
 import az.developia.studentcrud.repository.StudentRepository;
 
 @RestController
-@RequestMapping(path="/students")
+@RequestMapping(path = "/students")
 @CrossOrigin(origins = "*")
 public class StudentRestController {
 	@Autowired
-private StudentRepository studentRepository;
+	private StudentRepository studentRepository;
+	@Autowired
+	private StudentNoteRepository studentNoteRepository;
+
 	@PostMapping
-	public Student save(@Valid @RequestBody Student student,BindingResult result) {
-		if(result.hasErrors()) {
-		throw new MyRuntimeException(result);
+	public Student save(@Valid @RequestBody Student student, BindingResult result) {
+		if (result.hasErrors()) {
+			throw new MyRuntimeException(result);
 		}
 		return studentRepository.save(student);
-		
-		
+
 	}
+
 	@GetMapping
-	public List<Student> findAll(){
+	public List<Student> findAll() {
 		return studentRepository.findAll();
 	}
-	
-	@DeleteMapping(path="/{id}")
+
+	@DeleteMapping(path = "/{id}")
 	public void deleteById(@PathVariable Integer id) {
 		studentRepository.deleteById(id);
+		List<StudentNote> studentNotes=studentNoteRepository.findAllByStudentId(id);
+		studentNoteRepository.deleteAll(studentNotes);
 	}
-	
-	@GetMapping(path="/{id}")
+
+	@GetMapping(path = "/{id}")
 	public Student findById(@PathVariable Integer id) {
 		return studentRepository.findById(id).get();
 	}
-	
+
 }
