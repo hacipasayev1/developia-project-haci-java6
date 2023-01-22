@@ -78,6 +78,9 @@ function fillStudentsTable(students) {
 
     }
     studentsTbodyElement.innerHTML = studentsTbodyHtml;
+    $(document).ready(function() {
+        $('#students-table').DataTable();
+        });
 }
 loadAllStudents();
 function onDeleteStudent(studentId) {
