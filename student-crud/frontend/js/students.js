@@ -1,6 +1,8 @@
 var selectedStudentId = 0;
 var API_URL = "http://localhost:8585";
-var token="Basic "+window.btoa("muellim-1:1");
+var username=localStorage.getItem('username');
+var password=localStorage.getItem('password');
+var token="Basic "+window.btoa(username+":"+password);
 var studentNameInput = document.getElementById('student-name');
 var studentSurnameInput = document.getElementById('student-surname');
 var studentsTbodyElement = document.getElementById('students-tbody');

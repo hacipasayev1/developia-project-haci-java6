@@ -2,6 +2,7 @@ package az.developia.studentcrud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,9 @@ public UserModel addUser(@RequestBody UserModel user) {
 	authority.setAuthority("teacher");
 	authorityRepository.save(authority);
 	return savedUser;
+}
+@GetMapping(path="/login")
+public void login() {
+	
 }
 }
