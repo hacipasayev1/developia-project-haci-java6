@@ -1,6 +1,6 @@
 var selectedStudentId = 0;
 var API_URL = "http://localhost:8585";
-var token="Basic "+window.btoa("u:p");
+var token="Basic "+window.btoa("muellim-1:1");
 var studentNameInput = document.getElementById('student-name');
 var studentSurnameInput = document.getElementById('student-surname');
 var studentsTbodyElement = document.getElementById('students-tbody');
