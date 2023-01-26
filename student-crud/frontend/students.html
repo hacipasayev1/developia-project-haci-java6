@@ -16,7 +16,7 @@
     <script>
    
       </script>
-
+ <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
   <link rel="stylesheet" href="css/students.css">
 </head>
 
@@ -41,20 +41,7 @@
   </div>
   <hr>
   <div class="container">
-    <table class="table table-bordered" id="students-table">
-      <thead>
-        <tr>
-          <th>Kod</th>
-          <th>Ad</th>
-          <th>Soyad</th>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody id="students-tbody">
-
-      </tbody>
-
-    </table>
+    <div id="myStudents" style="height: 300px; width:100%;" class="ag-theme-alpine"></div>
   </div>
   <!-- The Modal -->
   <div class="modal fade" id="noteModal">

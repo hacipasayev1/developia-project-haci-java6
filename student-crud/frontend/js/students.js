@@ -3,6 +3,7 @@ var API_URL = "http://localhost:8585";
 var username=localStorage.getItem('username');
 var password=localStorage.getItem('password');
 var token="Basic "+window.btoa(username+":"+password);
+var gridOptionsGlobal;
 var studentNameInput = document.getElementById('student-name');
 var studentSurnameInput = document.getElementById('student-surname');
 var studentsTbodyElement = document.getElementById('students-tbody');
@@ -68,26 +69,9 @@ function loadAllStudents() {
     http.send();
 }
 function fillStudentsTable(students) {
-    var studentsTbodyHtml = "";
-    for (var i = 0; i < students.length; i++) {
-        var student = students[i];
-        studentsTbodyHtml += "<tr><td>" + student.id + "</td>";
-        studentsTbodyHtml += "<td>" + student.name + "</td>";
-        studentsTbodyHtml += "<td>" + student.surname + "</td>";
-
-        studentsTbodyHtml += "<td><button class='btn btn-danger' onclick='onDeleteStudent(" + student.id + ")'>Sil</button> ";
-        studentsTbodyHtml += "<button class='btn btn-primary' onclick='onEditStudent(" + student.id + ")'>Redakte</button> ";
-        studentsTbodyHtml += "<button class='btn btn-warning' onclick='onShowStudentNotes(" + student.id + ")'  type='button'  data-toggle='modal' data-target='#notesListModal'>Qeydlər</button> ";
-        studentsTbodyHtml += "<button class='btn btn-secondary' onclick='onNoteStudent(" + student.id + ")' type='button'  data-toggle='modal' data-target='#noteModal' " +
-            ">Qeyd yaz</button></td></tr>";
-
-    }
-    studentsTbodyElement.innerHTML = studentsTbodyHtml;
-    $(document).ready(function() {
-        $('#students-table').DataTable();
-        });
+    gridOptionsGlobal.api.setRowData(students);
 }
-loadAllStudents();
+
 function onDeleteStudent(studentId) {
     if (confirm('silmeye eminsiniz?')) {
         var http = new XMLHttpRequest();
@@ -181,3 +165,35 @@ function loadAllStudentNotes(studentId) {
     http.setRequestHeader("Authorization", token);
     http.send();
 }
+
+
+function prepareAgGridTable(){
+    const columnDefs = [
+        { field: "id",headerName:"Kod"},
+        { field: "name",headerName:"Ad" },
+        { field: "surname",headerName:"Soyad" }
+      ];
+      
+      
+      
+      // let the grid know which columns and what data to use
+      const gridOptions = {
+        columnDefs: columnDefs,
+        rowData: [],
+        defaultColDef:{sortable:true,filter:true},
+        animateRows:true,
+        floatingFilter:true,
+        pagination:true,
+        rowSelection:'multiple'
+      };
+      gridOptionsGlobal=gridOptions;
+      
+      // setup the grid after the page has finished loading
+      document.addEventListener('DOMContentLoaded', () => {
+          const gridDiv = document.querySelector('#myStudents');
+          new agGrid.Grid(gridDiv, gridOptions);
+      });
+      
+}
+prepareAgGridTable();
+loadAllStudents();
