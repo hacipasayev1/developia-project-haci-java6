@@ -29,9 +29,9 @@ private AuthorityRepository authorityRepository;
 public UserModel addUser(@RequestBody UserModel user) {
 Optional<UserModel> userOptional = userRepository.findById(user.getUsername());
 if(userOptional.isPresent()) {
-	
-	user.setUsername("");
-	return user;
+	UserModel u=new UserModel();
+	u.setUsername("");
+	return u;
 }else {
 	
 	user.setPassword("{noop}"+user.getPassword());

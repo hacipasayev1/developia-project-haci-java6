@@ -37,7 +37,14 @@
         var password=passwordInput.value;
         var http=new XMLHttpRequest();
         http.onload=function(){
-       alert('Success');
+          var response=this.responseText;
+          var user=JSON.parse(response);
+          if(user.username==""){
+            alert("Bu istifadəçi adı artıq mövcuddur!");
+          }else{
+            alert('Success');
+          }
+       
         }
         var userObject={};
         userObject.username=username;
