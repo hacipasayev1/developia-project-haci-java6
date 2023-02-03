@@ -47,6 +47,7 @@ private TeacherRepository repository;
 		dto.setName(t.getName());
 		dto.setSurname(t.getSurname());
 		dto.setStudents(dw.getStudents());
+		dto.setPort(dw.getPort());
 		teacherDtos.add(dto);
 		}
 		dataWrapper.setTeacherDtos(teacherDtos);

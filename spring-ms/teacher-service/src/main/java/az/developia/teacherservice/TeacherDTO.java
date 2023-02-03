@@ -16,4 +16,5 @@ public class TeacherDTO {
 	private String name;
 	private String surname;
 	private List<Student> students;
+	private String port;
 }
