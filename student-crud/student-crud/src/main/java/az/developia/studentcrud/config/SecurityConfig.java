@@ -22,6 +22,7 @@ protected void configure(HttpSecurity http) throws Exception {
 	.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 	.antMatchers(HttpMethod.POST,"/users/**").permitAll()
 	.anyRequest().authenticated().and().httpBasic();
+	http.headers().frameOptions().disable();
 }
 @Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
