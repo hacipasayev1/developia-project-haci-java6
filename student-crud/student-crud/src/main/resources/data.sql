@@ -15,9 +15,12 @@ values
 ;
 
 insert into student
-(name,surname)
+(name,surname,teacher)
 values
-('Eli','Hesenov'),
-('Serxan ','Babayev'),
-('Cavid','Eliyev')
+('Eli','Hesenov','m1'),
+('Serxan ','Babayev','m1'),
+('Cavid','Eliyev','m1'),
+('Ayxan','Mirzeyev','m2'),
+('Fidan','Ceferli','m2'),
+('Mehemmed','Seferov','m3')
 ;

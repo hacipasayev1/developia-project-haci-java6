@@ -21,6 +21,7 @@ private String name;
 	@Size(min=2,message = "Minimum 2 simvol yazılmalıdır!")
 	@Size(max=30,message = "Maksimum 30 simvol yazılmalıdır!")
 private String surname;
+	private String teacher;
 public Integer getId() {
 	return id;
 }
@@ -38,5 +39,11 @@ public String getSurname() {
 }
 public void setSurname(String surname) {
 	this.surname = surname;
+}
+public String getTeacher() {
+	return teacher;
+}
+public void setTeacher(String teacher) {
+	this.teacher = teacher;
 }
 }

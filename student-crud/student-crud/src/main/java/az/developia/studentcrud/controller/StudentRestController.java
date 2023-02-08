@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,13 +39,14 @@ public class StudentRestController {
 		if (result.hasErrors()) {
 			throw new MyRuntimeException(result);
 		}
+		student.setTeacher(getUser());
 		return studentRepository.save(student);
 
 	}
 
 	@GetMapping
 	public List<Student> findAll() {
-		return studentRepository.findAll();
+		return studentRepository.findAllByTeacher(getUser());
 	}
 
 	@DeleteMapping(path = "/{id}")
@@ -59,4 +61,8 @@ public class StudentRestController {
 		return studentRepository.findById(id).get();
 	}
 
+	private String getUser() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+
+	}
 }
