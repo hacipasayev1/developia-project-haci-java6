@@ -22,6 +22,7 @@ private String name;
 	@Size(max=30,message = "Maksimum 30 simvol yazılmalıdır!")
 private String surname;
 	private String teacher;
+	private String profilePhoto;
 public Integer getId() {
 	return id;
 }
@@ -45,5 +46,11 @@ public String getTeacher() {
 }
 public void setTeacher(String teacher) {
 	this.teacher = teacher;
+}
+public String getProfilePhoto() {
+	return profilePhoto;
+}
+public void setProfilePhoto(String profilePhoto) {
+	this.profilePhoto = profilePhoto;
 }
 }

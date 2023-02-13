@@ -29,9 +29,8 @@ async function onSaveStudent(event) {
             "Authorization":token
         }
     });
-    if(response.status==200){
-        alert("Şəkil yükləndi!");
-}
+  var photoName=await response.json();
+  saveStudent(photoName.fileName);
 }
 function loadAllStudents() {
     var http = new XMLHttpRequest();
@@ -173,3 +172,46 @@ function prepareAgGridTable(){
 }
 prepareAgGridTable();
 loadAllStudents();
+
+function saveStudent(photo){
+    var studentName = studentNameInput.value;
+    var studentSurname = studentSurnameInput.value;
+
+    var studentObject = {};
+    studentObject.id = selectedStudentId;
+    studentObject.name = studentName;
+    studentObject.surname = studentSurname;
+    studentObject.profilePhoto=photo;
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+        if (this.status == 400) {
+            var nameError = "";
+            var surnameError = "";
+            var errorObject = JSON.parse(this.responseText);
+            errorObject.validations.forEach(error => {
+                if (error.field == 'name') {
+
+                    nameError += error.message + "<br>";
+                }
+                if (error.field == 'surname') {
+                    surnameError += error.message + "<br>";
+
+                }
+
+            });
+            nameErrorElement.innerHTML = nameError;
+            surnameErrorElement.innerHTML = surnameError;
+        } else {
+            clearErrorMessages();
+            selectedStudentId = 0;
+            setHeaderText('Yeni tələbə qeydiyyatı');
+
+            loadAllStudents();
+        }
+
+    }
+    http.open("POST", API_URL + "/students", true);
+    http.setRequestHeader("Content-type", "application/json");
+    http.setRequestHeader("Authorization", token);
+    http.send(JSON.stringify(studentObject));
+}

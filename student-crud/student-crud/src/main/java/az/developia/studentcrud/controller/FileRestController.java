@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import az.developia.studentcrud.model.FileModel;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/files")
 public class FileRestController {
 	@PostMapping(path = "/upload")
-	public String uploadFile(@RequestParam(name = "file", required = false) MultipartFile file) {
+	public FileModel uploadFile(@RequestParam(name = "file", required = false) MultipartFile file) {
 		String fileName=file.getOriginalFilename();
 
 		try {
@@ -41,7 +43,8 @@ public class FileRestController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-
-		return fileName;
+FileModel model=new FileModel();
+model.setFileName(fileName); 
+		return model;
 	}
 }
