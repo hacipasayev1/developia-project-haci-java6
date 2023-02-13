@@ -6,6 +6,7 @@ var token="Basic "+window.btoa(username+":"+password);
 var gridOptionsGlobal;
 var studentNameInput = document.getElementById('student-name');
 var studentSurnameInput = document.getElementById('student-surname');
+var studentProfilePhotoInput = document.getElementById('student-photo');
 var studentsTbodyElement = document.getElementById('students-tbody');
 var notesTbodyElement = document.getElementById('notes-tbody');
 
@@ -15,47 +16,22 @@ var surnameErrorElement = document.getElementById('surname-error');
 var studentNoteInput = document.getElementById('student-note');
 
 
-function onSaveStudent(event) {
+async function onSaveStudent(event) {
     event.preventDefault();
-    var studentName = studentNameInput.value;
-    var studentSurname = studentSurnameInput.value;
+    let formData=new FormData();
+    let photo=studentProfilePhotoInput.files[0];
 
-    var studentObject = {};
-    studentObject.id = selectedStudentId;
-    studentObject.name = studentName;
-    studentObject.surname = studentSurname;
-    var http = new XMLHttpRequest();
-    http.onload = function () {
-        if (this.status == 400) {
-            var nameError = "";
-            var surnameError = "";
-            var errorObject = JSON.parse(this.responseText);
-            errorObject.validations.forEach(error => {
-                if (error.field == 'name') {
-
-                    nameError += error.message + "<br>";
-                }
-                if (error.field == 'surname') {
-                    surnameError += error.message + "<br>";
-
-                }
-
-            });
-            nameErrorElement.innerHTML = nameError;
-            surnameErrorElement.innerHTML = surnameError;
-        } else {
-            clearErrorMessages();
-            selectedStudentId = 0;
-            setHeaderText('Yeni tələbə qeydiyyatı');
-
-            loadAllStudents();
+    formData.append("file",photo);
+    let response=await fetch(API_URL+'/files/upload',{
+        method:"POST",
+        body:formData,
+        headers:{
+            "Authorization":token
         }
-
-    }
-    http.open("POST", API_URL + "/students", true);
-    http.setRequestHeader("Content-type", "application/json");
-    http.setRequestHeader("Authorization", token);
-    http.send(JSON.stringify(studentObject));
+    });
+    if(response.status==200){
+        alert("Şəkil yükləndi!");
+}
 }
 function loadAllStudents() {
     var http = new XMLHttpRequest();
