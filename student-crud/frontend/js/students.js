@@ -215,3 +215,9 @@ function saveStudent(photo){
     http.setRequestHeader("Authorization", token);
     http.send(JSON.stringify(studentObject));
 }
+
+function onShowImage(){
+    var selectedStudents=gridOptionsGlobal.api.getSelectedRows();
+    console.log(selectedStudents[0]);
+    document.getElementById('student-image').src=API_URL+"/files/download/"+ selectedStudents[0].profilePhoto;
+}

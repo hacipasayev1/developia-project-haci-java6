@@ -47,6 +47,7 @@
   </div>
   <hr>
   <div class="container">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageModal" onclick="onShowImage()">Şəkili göstər</button>
     <div id="myStudents" style="height: 300px; width:100%;" class="ag-theme-alpine"></div>
   </div>
   <!-- The Modal -->
@@ -113,6 +114,30 @@
           <button type="button" class="btn btn-danger" data-dismiss="modal">Bagla</button>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="imageModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Tələbənin şəkili</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+   <img src="" style="width: 100%;" id="student-image">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
+        </div>
+        
       </div>
     </div>
   </div>
