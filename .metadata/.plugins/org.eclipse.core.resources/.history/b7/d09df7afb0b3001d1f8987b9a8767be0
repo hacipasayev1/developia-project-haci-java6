@@ -1,0 +1,9 @@
+package az.developia.springmvcjdbc.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import az.developia.springmvcjdbc.model.Order;
+
+public interface OrderRepo extends JpaRepository<Order, Integer>{
+
+}

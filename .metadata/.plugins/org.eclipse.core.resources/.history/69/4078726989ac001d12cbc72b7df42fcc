@@ -1,0 +1,28 @@
+package ders46;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Main2 {
+public static void main(String[] args) {
+List<String> names=List.of("Adil","Cavid","eli","Haci");
+
+List<String> namesFiltered=new ArrayList<>();
+String searchValue="a";
+for (String n : names) {
+	if(n.contains(searchValue)) {
+		namesFiltered.add(n);
+	}
+	
+}
+//System.out.println(namesFiltered);
+List<String> namesFiltered2=names.stream().filter(n->n.contains(searchValue)).map(n->n.toUpperCase()).forEach(Main2::myPrint);
+//System.out.println(namesFiltered2);
+
+}
+static void myPrint(String s) {
+	System.out.println(s);
+	
+}
+}

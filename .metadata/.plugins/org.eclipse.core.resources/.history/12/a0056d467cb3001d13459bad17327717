@@ -1,0 +1,12 @@
+package az.developia.springmvcjdbc.dto;
+
+import java.util.List;
+
+import lombok.Data;
+
+@Data
+public class UserDTO {
+private String username;
+private String password;
+private List<String> auth;
+}

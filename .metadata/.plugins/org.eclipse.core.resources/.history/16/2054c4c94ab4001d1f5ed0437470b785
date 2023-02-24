@@ -1,0 +1,18 @@
+package az.developia.MarketShopHaji.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import az.developia.MarketShopHaji.model.UserModel;
+import az.developia.MarketShopHaji.repository.UserRepo;
+
+@Service
+public class AdminService {
+@Autowired
+private UserRepo userRepo;
+
+
+public void save(UserModel user) {
+	userRepo.save(user);
+}
+}

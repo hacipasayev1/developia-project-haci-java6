@@ -1,0 +1,9 @@
+package az.developia.springmvcjdbc.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import az.developia.springmvcjdbc.model.Student;
+
+public interface UserRepo extends JpaRepository<Student, Integer>{
+
+}

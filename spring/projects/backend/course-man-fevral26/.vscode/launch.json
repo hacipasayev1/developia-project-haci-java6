@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CourseManFevral26Application<course-man-fevral26>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "az.developia.course.CourseManFevral26Application",
+            "projectName": "course-man-fevral26",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

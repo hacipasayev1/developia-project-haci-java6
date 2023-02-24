@@ -1,0 +1,5 @@
+package az.developia.MarketShopHaji.config;
+
+public class SecurityConfig {
+
+}

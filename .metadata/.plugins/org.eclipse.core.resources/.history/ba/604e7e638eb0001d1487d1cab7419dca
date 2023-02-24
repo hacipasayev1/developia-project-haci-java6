@@ -1,0 +1,92 @@
+package az.developia.springmvcjdbc.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import az.developia.springmvcjdbc.model.Student;
+import az.developia.springmvcjdbc.service.StudentService;
+
+@Controller
+@RequestMapping(path="/students")
+public class StudentController {
+@Autowired
+private StudentService service;
+
+@GetMapping
+public String showStudents(Model m) {
+	List<Student> all = service.findAll();
+	m.addAttribute("students", all);
+	return "students";
+}
+
+@GetMapping(path="/open-save-page")
+public String openSavePage(Model m) {
+	Student s=new Student();
+	m.addAttribute("student", s);
+	return "save-student";
+}
+
+@PostMapping(path="/save")
+public String save(@Valid @ModelAttribute(value = "student") Student s, BindingResult br) {
+	if(br.hasErrors()) {
+		return "save-student";
+	}
+	service.save(s);
+	return "redirect:/students";
+}
+
+@GetMapping(path="/delete/{id}")
+public String delete(@PathVariable Integer id) {
+	service.deleteById(id);
+	return "redirect:/students";
+	
+}
+
+@GetMapping(path="/edit/{id}")
+public String edit(@PathVariable Integer id,Model m) {
+	Student s=service.findById(id);
+	m.addAttribute("student", s);
+	return "save-student";
+}
+
+@GetMapping(path="/search")
+public String search(Model m,@RequestParam(name = "sorguAd") String sorguAd,@RequestParam(name = "sorguSoyad") String sorguSoyad) {
+	List<Student> all = service.findAll();
+
+	List<Student> filtered=new ArrayList<>();
+	for (Student s : all) {
+		if(s.getName().toLowerCase().contains(sorguAd.toLowerCase()) && s.getSurname().toLowerCase().contains(sorguSoyad.toLowerCase())) {
+			filtered.add(s);
+		}
+	}
+	
+	if(filtered.size()==0) {
+		m.addAttribute("message", "tapmadiq");
+		return "students";
+	}
+	m.addAttribute("students", filtered);
+	return "students";
+}
+
+@InitBinder
+public void initbAlma(WebDataBinder b) {
+	StringTrimmerEditor e=new StringTrimmerEditor(false);
+	b.registerCustomEditor(String.class, e);
+}
+}

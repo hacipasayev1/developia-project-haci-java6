@@ -1,0 +1,10 @@
+package az.developia.springmvcjdbc.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import az.developia.springmvcjdbc.model.Student;
+import az.developia.springmvcjdbc.model.UserModel;
+
+public interface AuthRepo extends JpaRepository<UserModel, String>{
+
+}

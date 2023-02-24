@@ -1,0 +1,5 @@
+package az.developia.MarketShopHaji.model;
+
+public class Cashier {
+
+}

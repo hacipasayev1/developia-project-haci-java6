@@ -1,0 +1,8 @@
+package az.developia.springrestsecurity.exc;
+
+public class UsenameAlreadyDefinedException extends RuntimeException {
+	public UsenameAlreadyDefined(String message) {
+		super(message);
+	}
+
+}

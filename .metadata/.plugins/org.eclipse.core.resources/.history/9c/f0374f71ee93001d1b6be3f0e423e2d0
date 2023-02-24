@@ -1,0 +1,18 @@
+package az.developia.springrest.aop;
+
+import java.util.List;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+import az.developia.springrest.model.Student;
+
+@Aspect
+@Component
+public class MyAspect {
+@Before(value = "execution( public * findAll())")
+public void doIt() {
+	System.out.println("mudure mail at");
+}
+}

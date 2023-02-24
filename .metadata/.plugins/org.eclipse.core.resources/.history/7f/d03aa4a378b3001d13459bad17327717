@@ -1,0 +1,5 @@
+package az.developia.springmvcjdbc.dto;
+
+public class UserDTO {
+
+}

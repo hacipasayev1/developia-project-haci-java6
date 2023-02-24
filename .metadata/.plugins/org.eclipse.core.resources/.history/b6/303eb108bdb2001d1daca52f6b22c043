@@ -1,0 +1,5 @@
+package az.developia.springmvcjdbc.config;
+
+public class SecurityConfig {
+
+}

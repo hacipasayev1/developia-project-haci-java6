@@ -1,0 +1,19 @@
+CREATE TABLE students (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(45) DEFAULT NULL,
+ surname varchar(45) DEFAULT NULL,
+  phone varchar(45) DEFAULT NULL,
+  email varchar(45) DEFAULT NULL,
+  address varchar(245) DEFAULT NULL,
+  birthday date DEFAULT NULL,
+  sector varchar(45) DEFAULT NULL,
+  PRIMARY KEY (id)
+) ;
+
+insert into students
+(name,surname,phone,email,address,birthday,sector) values
+('ad1','soyad1','033','email1@mail.ru','unvan1','2000-06-09','Az'),
+('ad2','soyad1','033','email1@mail.ru','unvan1','2000-06-09','Az'),
+('ad3','soyad1','033','email1@mail.ru','unvan1','2000-06-09','Az'),
+('ad4','soyad1','033','email1@mail.ru','unvan1','2000-06-09','Az')
+;

@@ -1,0 +1,5 @@
+package az.developia.MarketShopHaji.repository;
+
+public interface UserRepo {
+
+}

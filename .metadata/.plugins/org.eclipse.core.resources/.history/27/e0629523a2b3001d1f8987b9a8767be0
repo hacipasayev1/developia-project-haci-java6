@@ -1,0 +1,5 @@
+package az.developia.springmvcjdbc.repository;
+
+public class CustomerRepo {
+
+}

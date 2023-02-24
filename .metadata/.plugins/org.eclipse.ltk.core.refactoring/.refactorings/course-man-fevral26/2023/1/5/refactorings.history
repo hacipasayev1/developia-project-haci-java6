@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Student.java&apos; to &apos;student-ms/src/main/java/az.developia.studentms&apos;&#x0D;&#x0A;- Original project: &apos;course-man-fevral26&apos;&#x0D;&#x0A;- Destination element: &apos;student-ms/src/main/java/az.developia.studentms&apos;&#x0D;&#x0A;- Original element: &apos;az.developia.course.model.Student.java&apos;" description="Copy compilation unit" destination="=student-ms/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;az.developia.studentms" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;az.developia.course.model{Student.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1675015982443" units="1" version="1.0"/>
+</session>

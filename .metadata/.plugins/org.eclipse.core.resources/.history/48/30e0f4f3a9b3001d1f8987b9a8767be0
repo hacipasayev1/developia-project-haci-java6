@@ -1,0 +1,5 @@
+package az.developia.springmvcjdbc.controller;
+
+public class OrderRest {
+
+}
