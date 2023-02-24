@@ -5,4 +5,7 @@ values
 
 insert into authorities(username,authority)
 values
-('admin','add:cashier');
+('admin','add:cashier'),
+('admin','delete:cashier'),
+('admin','add:product'),
+('admin','update:product');

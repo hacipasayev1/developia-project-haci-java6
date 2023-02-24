@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.MarketShopHaji.dto.UserDTO;
 import az.developia.MarketShopHaji.exc.UsernameAlreadyDefinedException;
 import az.developia.MarketShopHaji.model.AuthorityModel;
+import az.developia.MarketShopHaji.model.Cashier;
 import az.developia.MarketShopHaji.model.UserModel;
-import az.developia.MarketShopHaji.service.AdminService;
+import az.developia.MarketShopHaji.service.GeneralService;
 
 @RestController
-@RequestMapping(path = "/admins")
+@RequestMapping(path = "/cashiers")
 @CrossOrigin(origins = "*")
-public class AdminRestController {
+public class CashierRestController {
 
 	@Autowired
-	private AdminService adminService;
+	private GeneralService cashierService;
 
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -32,18 +35,23 @@ public class AdminRestController {
 	public void addCashier(@RequestBody UserDTO user) {
 		
 		boolean usernameFound=false;
-		UserModel findedUser=adminService.findByUsername(user.getUsername());
+		UserModel findedUser=cashierService.findByUsername(user.getUsername());
 		if(findedUser!=null) {
 			usernameFound=true;
 		}
 		if(usernameFound) {
 			throw new UsernameAlreadyDefinedException("istifadeci adi artiq istifade olunub, "+user.getUsername());
 		}
+		Cashier cashier=new Cashier();
+		cashier.setName(user.getName());
+		cashier.setSurname(user.getSurname());
+		cashier.setEmail(user.getEmail());
+		cashier.setPhone(user.getPhone());
 		UserModel userModel = new UserModel();
 		userModel.setUsername(user.getUsername());
 		userModel.setPassword("{bcrypt}" + encoder.encode(user.getPassword()));
 		userModel.setEnabled(1);
-		adminService.save(userModel);
+		cashierService.save(userModel);
 		ArrayList<AuthorityModel> authorityModels = new ArrayList<>();
 		for (String a : user.getAuths()) {
 			AuthorityModel authorityModel = new AuthorityModel();
@@ -51,7 +59,13 @@ public class AdminRestController {
 			authorityModel.setAuthority(a);
 			authorityModels.add(authorityModel);
 		}
-		adminService.saveAll(authorityModels);
-
+		cashierService.saveAll(authorityModels);
+cashierService.save(cashier);
+	}
+	
+	@DeleteMapping(path="/{id}")
+	@PreAuthorize(value = "hasAuthority('delete:cashier')")
+	public void deleteById(@PathVariable Integer id) {
+		cashierService.deleteById(id);
 	}
 }
