@@ -8,4 +8,5 @@ values
 ('admin','add:cashier'),
 ('admin','delete:cashier'),
 ('admin','add:product'),
-('admin','update:product');
+('admin','update:product'),
+('admin','update:cashier');

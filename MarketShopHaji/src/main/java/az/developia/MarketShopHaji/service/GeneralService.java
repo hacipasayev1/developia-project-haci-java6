@@ -39,7 +39,13 @@ public class GeneralService {
 	}
 
 	public void deleteById(Integer id) {
+Cashier cashier= cashierRepo.findById(id).get();
 
+			userRepo.deleteById(cashier.getUsername());
+			cashierRepo.deleteById(id);
+
+		
+		
 	}
 
 	public List<Product> findAll() {
@@ -65,5 +71,15 @@ public class GeneralService {
 		} else {
 			return null;
 		}
+	}
+
+	public Cashier findByIdCashier(Integer id) {
+	Optional<Cashier> finded = cashierRepo.findById(id);
+	if(finded.isPresent()) {
+		return finded.get();
+	}else {
+		return null;
+	}
+		
 	}
 }
