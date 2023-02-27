@@ -17,8 +17,7 @@ import az.developia.MarketShopHaji.repository.UserRepo;
 
 @Service
 public class GeneralService {
-	@Autowired
-	private ProductRepo productRepo;
+	
 	@Autowired
 	private UserRepo userRepo;
 	@Autowired
@@ -48,31 +47,19 @@ Cashier cashier= cashierRepo.findById(id).get();
 		
 	}
 
-	public List<Product> findAll() {
-
-		return productRepo.findAll();
-	}
+//	public List<Product> findAll() {
+//
+//		return productRepo.findAll();
+//	}
 
 	public void save(Cashier cashier) {
 		cashierRepo.save(cashier);
 
 	}
 
-	public Product save(Product product) {
-		productRepo.save(product);
-		return product;
+	
 
-	}
-
-	public Product findById(Integer id) {
-		Optional<Product> finded = productRepo.findById(id);
-		if (finded.isPresent()) {
-			return finded.get();
-		} else {
-			return null;
-		}
-	}
-
+	
 	public Cashier findByIdCashier(Integer id) {
 	Optional<Cashier> finded = cashierRepo.findById(id);
 	if(finded.isPresent()) {

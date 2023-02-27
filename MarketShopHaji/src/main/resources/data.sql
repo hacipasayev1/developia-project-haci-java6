@@ -9,4 +9,5 @@ values
 ('admin','delete:cashier'),
 ('admin','add:product'),
 ('admin','update:product'),
-('admin','update:cashier');
+('admin','update:cashier'),
+('admin','findAll:product');

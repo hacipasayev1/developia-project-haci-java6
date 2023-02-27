@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,22 +18,25 @@ import az.developia.MarketShopHaji.exc.IdFalseException;
 import az.developia.MarketShopHaji.exc.NotFindedProductException;
 import az.developia.MarketShopHaji.model.Product;
 import az.developia.MarketShopHaji.service.GeneralService;
+import az.developia.MarketShopHaji.service.ProductService;
 
 @RestController
 @RequestMapping(path = "products")
 @CrossOrigin(origins = "*")
 public class ProductRestController {
 	@Autowired
-	private GeneralService productService;
-
+	private ProductService productService;
+	
 	@GetMapping
-	public List<Product> findAll() {
+	@PreAuthorize("hasAuthority('findAll:product')")
+	public List<Product> findAll(){
 		return productService.findAll();
 	}
 
 	@PostMapping
 	@PreAuthorize("hasAuthority('add:product')")
 	public Product addProduct(@RequestBody Product product) {
+		product.setId(null);
 		productService.save(product);
 		return product;
 	}
@@ -49,5 +54,9 @@ public class ProductRestController {
 		}
 		productService.save(product);
 		return product;
+	}
+	@DeleteMapping(path="{id}")
+	public void deleteProduct(@PathVariable Integer id) {
+		productService.deleteById(id);
 	}
 }
