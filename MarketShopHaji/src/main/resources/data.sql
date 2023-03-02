@@ -10,4 +10,6 @@ values
 ('admin','add:product'),
 ('admin','update:product'),
 ('admin','update:cashier'),
-('admin','findAll:product');
+('admin','findAll:product'),
+('admin','search:product'),
+('cashier','productAllInfo:forCashier');

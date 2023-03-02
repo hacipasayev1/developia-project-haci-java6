@@ -2,9 +2,12 @@ package az.developia.MarketShopHaji.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.MarketShopHaji.dto.UserDTO;
 import az.developia.MarketShopHaji.exc.IdFalseException;
+import az.developia.MarketShopHaji.exc.MyValidationException;
+import az.developia.MarketShopHaji.exc.NotFindedCashierException;
 import az.developia.MarketShopHaji.exc.NotFindedProductException;
 import az.developia.MarketShopHaji.exc.UsernameAlreadyDefinedException;
 import az.developia.MarketShopHaji.model.AuthorityModel;
@@ -35,7 +40,10 @@ public class CashierRestController {
 
 	@PostMapping
 	@PreAuthorize(value = "hasAuthority('add:cashier')")
-	public void addCashier(@RequestBody UserDTO user) {
+	public void addCashier(@Valid @RequestBody UserDTO user,BindingResult br) {
+		if(br.hasErrors()) {
+			throw new MyValidationException(br);
+		}
 
 		boolean usernameFound = false;
 		UserModel findedUser = cashierService.findByUsername(user.getUsername());
@@ -82,11 +90,13 @@ public class CashierRestController {
 		}
 		Cashier c = cashierService.findByIdCashier(user.getId());
 		if (c == null) {
-			throw new NotFindedProductException("bu id-li kassir bazada yoxdur");
+			throw new NotFindedCashierException("bu id-li kassir bazada yoxdur");
 		}
 		boolean usernameFound = false;
 		UserModel findedUser = cashierService.findByUsername(user.getUsername());
-		if (findedUser != null) {
+		if(c.getUsername().contains(user.getUsername())) {
+			
+		}else if (findedUser != null) {
 			usernameFound = true;
 		}
 		if (usernameFound) {
