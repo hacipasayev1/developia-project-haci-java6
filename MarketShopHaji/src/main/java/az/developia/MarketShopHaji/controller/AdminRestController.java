@@ -1,6 +1,8 @@
 package az.developia.MarketShopHaji.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -21,27 +23,32 @@ import az.developia.MarketShopHaji.dto.UserDTO;
 import az.developia.MarketShopHaji.exc.IdFalseException;
 import az.developia.MarketShopHaji.exc.MyValidationException;
 import az.developia.MarketShopHaji.exc.NotFindedCashierException;
-import az.developia.MarketShopHaji.exc.NotFindedProductException;
 import az.developia.MarketShopHaji.exc.UsernameAlreadyDefinedException;
 import az.developia.MarketShopHaji.model.AuthorityModel;
 import az.developia.MarketShopHaji.model.Cashier;
+import az.developia.MarketShopHaji.model.ProductSale;
+import az.developia.MarketShopHaji.model.Tarix;
 import az.developia.MarketShopHaji.model.UserModel;
 import az.developia.MarketShopHaji.service.GeneralService;
+import az.developia.MarketShopHaji.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/cashiers")
+@RequestMapping(path = "/admins")
 @CrossOrigin(origins = "*")
-public class CashierRestController {
+public class AdminRestController {
 
 	@Autowired
 	private GeneralService cashierService;
+
+	@Autowired
+	private ProductService productService;
 
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@PostMapping
 	@PreAuthorize(value = "hasAuthority('add:cashier')")
-	public void addCashier(@Valid @RequestBody UserDTO user,BindingResult br) {
-		if(br.hasErrors()) {
+	public void addCashier(@Valid @RequestBody UserDTO user, BindingResult br) {
+		if (br.hasErrors()) {
 			throw new MyValidationException(br);
 		}
 
@@ -94,9 +101,9 @@ public class CashierRestController {
 		}
 		boolean usernameFound = false;
 		UserModel findedUser = cashierService.findByUsername(user.getUsername());
-		if(c.getUsername().contains(user.getUsername())) {
-			
-		}else if (findedUser != null) {
+		if (c.getUsername().contains(user.getUsername())) {
+
+		} else if (findedUser != null) {
 			usernameFound = true;
 		}
 		if (usernameFound) {
@@ -124,6 +131,28 @@ public class CashierRestController {
 		cashierService.saveAll(authorityModels);
 
 		cashierService.save(cashier);
+	}
+
+	@PostMapping(path = "/twodatesale")
+	@PreAuthorize("hasAuthority('twodatesale:admin')")
+	public List<ProductSale> twoDateSale(@RequestBody Tarix tarix) {
+		LocalDate startDate = tarix.getStartDate();
+		LocalDate endDate = tarix.getEndDate();
+
+		List<LocalDate> datesInRange = new ArrayList<>();
+		LocalDate date = startDate;
+		while (!date.isAfter(endDate)) {
+			datesInRange.add(date);
+			date = date.plusDays(1);
+		}
+		List<ProductSale> general = new ArrayList<>();
+		for (LocalDate d : datesInRange) {
+			List<ProductSale> current = productService.findByDate(d);
+for(ProductSale p:current) {
+	general.add(p);
+}
+		}
+		return general;
 	}
 
 }

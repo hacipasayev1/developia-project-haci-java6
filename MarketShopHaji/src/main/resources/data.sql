@@ -12,4 +12,6 @@ values
 ('admin','update:cashier'),
 ('admin','findAll:product'),
 ('admin','search:product'),
-('cashier','productAllInfo:forCashier');
+('cashier','productAllInfo:forCashier'),
+('cashier','cashier:sale'),
+('admin','twodatesale:admin');

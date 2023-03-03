@@ -8,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import az.developia.MarketShopHaji.model.Product;
+import az.developia.MarketShopHaji.model.ProductSale;
 import az.developia.MarketShopHaji.repository.ProductRepo;
+import az.developia.MarketShopHaji.repository.ProductSaleRepo;
 @Service
 public class ProductService {
 	@Autowired
 	private ProductRepo productRepo;
+	
+	@Autowired
+	private ProductSaleRepo productSaleRepo;
 	
 	public Product save(Product product) {
 		LocalDate indi=LocalDate.now();
@@ -51,6 +56,19 @@ productRepo.deleteById(id);
 	public List<Product> productAllInfo(String barcode) {
 		
 		return productRepo.findAllByBarcode(barcode);
+	}
+
+	public ProductSale sale(ProductSale productSale) {
+		LocalDate indi=LocalDate.now();
+		productSale.setSaleDate(indi);
+		productSale.setCemqiymet(productSale.getPrice()*Double.valueOf(productSale.getSaleQuantity()));
+		productSaleRepo.save(productSale);
+		return productSale;
+	}
+
+	public List<ProductSale> findByDate(LocalDate d) {
+	return	productSaleRepo.findByDate(d);
+		
 	}
 
 
