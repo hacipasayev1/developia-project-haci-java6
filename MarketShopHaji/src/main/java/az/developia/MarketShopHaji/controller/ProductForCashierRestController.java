@@ -31,12 +31,12 @@ public class ProductForCashierRestController {
 	
 	
 @GetMapping
-@PreAuthorize("hasAuthority('productAllInfo:forCashier')")
+@PreAuthorize("hasAuthority('for:cashier')")
 public List<Product> productInfo(@RequestParam(name="barcode",required = false,defaultValue = "") String barcode){
 	return productService.productAllInfo(barcode);
 }
 @PostMapping(path="/sale")
-@PreAuthorize("hasAuthority('cashier:sale')")
+@PreAuthorize("hasAuthority('for:cashier')")
 public ProductSale productSale(@RequestBody ProductSaleDTO productSaleDto) {
 
 	List<Product> product = productService.productAllInfo(productSaleDto.getBarcode());

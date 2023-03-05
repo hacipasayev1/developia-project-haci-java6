@@ -21,10 +21,11 @@ public class ProductService {
 	
 	public Product save(Product product) {
 		LocalDate indi=LocalDate.now();
-		product.setRegisterDate(indi);
+		product.setUpdateDate(indi);
 		Double percent=(product.getCost()/product.getPrice())*100;
 		
 		product.setPercent(100-percent);
+		
 		productRepo.save(product);
 		return product;
 
@@ -69,6 +70,11 @@ productRepo.deleteById(id);
 	public List<ProductSale> findByDate(LocalDate d) {
 	return	productSaleRepo.findByDate(d);
 		
+	}
+
+	public List<ProductSale> allSales() {
+		
+		return productSaleRepo.findAll();
 	}
 
 

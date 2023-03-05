@@ -14,6 +14,7 @@ import az.developia.MarketShopHaji.exc.IdFalseException;
 import az.developia.MarketShopHaji.exc.MyValidationException;
 import az.developia.MarketShopHaji.exc.NotFindedCashierException;
 import az.developia.MarketShopHaji.exc.NotFindedProductException;
+import az.developia.MarketShopHaji.exc.ProductValidationException;
 import az.developia.MarketShopHaji.exc.UsernameAlreadyDefinedException;
 
 @RestControllerAdvice
@@ -44,6 +45,17 @@ public String handleNotFindedCashierException(NotFindedCashierException exceptio
 @ExceptionHandler
 @ResponseStatus(code = HttpStatus.ACCEPTED)
 public List<String> handleMyValidationException(MyValidationException exc){
+	BindingResult br=exc.getBr();
+	ArrayList<String> errors=new ArrayList<>();
+	for (FieldError e : br.getFieldErrors()) {
+		errors.add(e.getField()+":::"+e.getDefaultMessage());
+	}
+	return errors;
+}
+
+@ExceptionHandler
+@ResponseStatus(code = HttpStatus.ACCEPTED)
+public List<String> handleProductValidationException(ProductValidationException exc){
 	BindingResult br=exc.getBr();
 	ArrayList<String> errors=new ArrayList<>();
 	for (FieldError e : br.getFieldErrors()) {

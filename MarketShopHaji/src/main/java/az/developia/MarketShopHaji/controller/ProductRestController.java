@@ -25,6 +25,7 @@ import az.developia.MarketShopHaji.dto.ProductDTO;
 import az.developia.MarketShopHaji.exc.IdFalseException;
 import az.developia.MarketShopHaji.exc.MyValidationException;
 import az.developia.MarketShopHaji.exc.NotFindedProductException;
+import az.developia.MarketShopHaji.exc.ProductValidationException;
 import az.developia.MarketShopHaji.model.Product;
 import az.developia.MarketShopHaji.service.ProductService;
 
@@ -38,14 +39,17 @@ public class ProductRestController {
 	private ProductService productService;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('findAll:product')")
+	@PreAuthorize("hasAuthority('for:admin')")
 	public List<Product> findAll() {
 		return productService.findAll();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('add:product')")
-	public Product addProduct(@RequestBody ProductDTO productDto) {
+	@PreAuthorize("hasAuthority('for:admin')")
+	public Product addProduct(@Valid @RequestBody ProductDTO productDto,BindingResult br) {
+		if (br.hasErrors()) {
+			throw new ProductValidationException(br);
+		}
 		Product product = new Product();
 		mapper.map(productDto, product);
 
@@ -56,9 +60,11 @@ public class ProductRestController {
 	}
 
 	@PutMapping
-	@PreAuthorize("hasAuthority('update:product')")
-	public Product updateProduct(@RequestBody ProductDTO productDto) {
-
+	@PreAuthorize("hasAuthority('for:admin')")
+	public Product updateProduct(@Valid @RequestBody ProductDTO productDto,BindingResult br) {
+		if (br.hasErrors()) {
+			throw new ProductValidationException(br);
+		}
 		Product product = new Product();
 		mapper.map(productDto, product);
 		if (product.getId() == null || product.getId() == 0) {
@@ -69,6 +75,8 @@ public class ProductRestController {
 		if (p == null) {
 			throw new NotFindedProductException("bu id-li mehsul bazada yoxdur");
 		}
+	
+		product.setQuantity(product.getQuantity()+p.getQuantity());
 		productService.save(product);
 		return product;
 	}
@@ -80,9 +88,11 @@ public class ProductRestController {
 
 
 	@GetMapping(path="/search")
-	@PreAuthorize("hasAuthority('search:product')")
+	@PreAuthorize("hasAuthority('for:admin')")
 	public List<Product> searchProduct(@RequestParam(name="date", required = false, defaultValue = "")String date,@RequestParam(name="name", required = false, defaultValue = "")String name,@RequestParam(name="price", required = false, defaultValue = "")String price,@RequestParam(name="cost", required = false, defaultValue = "")String cost,@RequestParam(name="percent", required = false, defaultValue = "")String percent,@RequestParam(name="quantity", required = false, defaultValue = "")String quantity){
 	return productService.searchProduct(date,name,price,cost,percent,quantity);
 	}
+	
+	
 	
 }

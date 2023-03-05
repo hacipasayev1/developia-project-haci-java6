@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,7 +47,7 @@ public class AdminRestController {
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@PostMapping
-	@PreAuthorize(value = "hasAuthority('add:cashier')")
+	@PreAuthorize(value = "hasAuthority('for:admin')")
 	public void addCashier(@Valid @RequestBody UserDTO user, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new MyValidationException(br);
@@ -84,13 +85,13 @@ public class AdminRestController {
 	}
 
 	@DeleteMapping(path = "/{id}")
-	@PreAuthorize(value = "hasAuthority('delete:cashier')")
+	@PreAuthorize(value = "hasAuthority('for:admin')")
 	public void deleteById(@PathVariable Integer id) {
 		cashierService.deleteById(id);
 	}
 
 	@PutMapping
-	@PreAuthorize(value = "hasAuthority('update:cashier')")
+	@PreAuthorize(value = "hasAuthority('for:admin')")
 	public void updateCashier(@RequestBody UserDTO user) {
 		if (user.getId() == null || user.getId() == 0) {
 			throw new IdFalseException("id 0 yada null ola bilmez");
@@ -134,7 +135,7 @@ public class AdminRestController {
 	}
 
 	@PostMapping(path = "/twodatesale")
-	@PreAuthorize("hasAuthority('twodatesale:admin')")
+	@PreAuthorize("hasAuthority('for:admin')")
 	public List<ProductSale> twoDateSale(@RequestBody Tarix tarix) {
 		LocalDate startDate = tarix.getStartDate();
 		LocalDate endDate = tarix.getEndDate();
@@ -153,6 +154,13 @@ for(ProductSale p:current) {
 }
 		}
 		return general;
+	}
+	
+	
+	@GetMapping
+	@PreAuthorize("hasAuthority('for:admin')")
+	public List<ProductSale> allSales(){
+		return productService.allSales();
 	}
 
 }
